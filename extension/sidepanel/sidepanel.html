@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SightLite</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <svg class="logo-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/>
+      </svg>
+      <div>
+        <div class="logo-name">SightLite</div>
+        <div class="logo-sub">Accessible Browser Agent</div>
+      </div>
+    </div>
+    <div class="status-pill" id="status-pill">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-label">Ready</span>
+    </div>
+  </header>
+
+  <section class="task-section">
+    <label class="field-label" for="goal-input">TASK</label>
+    <textarea
+      id="goal-input"
+      rows="2"
+      placeholder="Type your command…"
+      spellcheck="false"
+    ></textarea>
+
+    <div class="btn-row">
+      <button class="btn btn-run" id="btn-run">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Run Agent
+      </button>
+      <button class="btn btn-pause" id="btn-pause" disabled>⏸ Pause</button>
+      <button class="btn btn-stop" id="btn-stop" disabled>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        Stop
+      </button>
+    </div>
+  </section>
+
+  <section class="perception-section">
+    <div class="section-hd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+      PERCEPTION
+    </div>
+    <div class="perc-grid">
+      <div class="perc-kv">
+        <span class="perc-k">Mode</span>
+        <span class="perc-v" id="perc-mode">—</span>
+      </div>
+      <div class="perc-kv">
+        <span class="perc-k">Inference</span>
+        <span class="perc-v mono" id="perc-inf">—</span>
+      </div>
+      <div class="perc-kv">
+        <span class="perc-k">Elements</span>
+        <span class="perc-v mono" id="perc-count">—</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="section-hd">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      AGENT ACTIVITY
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-empty">Run the agent to see activity here.</div>
+    </div>
+    <button class="btn-clear" id="btn-clear">Clear session</button>
+  </section>
+
+  <div class="confirm-overlay" id="confirm-overlay" hidden>
+    <div class="confirm-box">
+      <div class="confirm-title">⚠ Confirmation Required</div>
+      <div class="confirm-msg" id="confirm-msg">This action may be destructive.</div>
+      <div class="confirm-btns">
+        <button class="btn btn-cancel" id="btn-cancel-action">Cancel</button>
+        <button class="btn btn-confirm" id="btn-confirm-action">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="privacy-footer">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Privacy-first · On-device
+    <button class="link-btn" id="btn-diag-toggle">Diagnostics: <span id="diag-label">On</span></button>
+  </footer>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

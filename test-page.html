@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SightLite Test Page</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 { color: #333; }
+    .section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    button, input, select {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    input {
+      width: 300px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      border-radius: 4px;
+      display: none;
+    }
+    .result.show {
+      display: block;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .clickable-div {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff9800;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    .clickable-div:hover {
+      background: #f57c00;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 SightLite Test Page</h1>
+  <p>Use this page to test the SightLite extension's perception and interaction capabilities.</p>
+
+  <!-- Section 1: Basic Buttons -->
+  <div class="section">
+    <h2>1. Basic Buttons</h2>
+    <p>Test: <code>"click Submit"</code></p>
+    <button id="btn-submit">Submit</button>
+    <button id="btn-cancel">Cancel</button>
+    <button id="btn-save">Save Changes</button>
+    <div id="result-buttons" class="result"></div>
+  </div>
+
+  <!-- Section 2: Links -->
+  <div class="section">
+    <h2>2. Links</h2>
+    <p>Test: <code>"click Documentation"</code></p>
+    <a href="#docs" id="link-docs">Documentation</a>
+    <a href="#help" id="link-help">Help Center</a>
+    <a href="#support" id="link-support">Support</a>
+    <div id="result-links" class="result"></div>
+  </div>
+
+  <!-- Section 3: Input Fields -->
+  <div class="section">
+    <h2>3. Input Fields</h2>
+    <p>Test: <code>"type hello@example.com in email"</code></p>
+    <label>Email:</label><br>
+    <input type="email" id="input-email" placeholder="Enter your email">
+    <br>
+    <label>Password:</label><br>
+    <input type="password" id="input-password" placeholder="Enter password">
+    <br>
+    <button id="btn-login">Login</button>
+    <div id="result-inputs" class="result"></div>
+  </div>
+
+  <!-- Section 4: Select Dropdown -->
+  <div class="section">
+    <h2>4. Select Dropdown</h2>
+    <p>Test: <code>"click country dropdown"</code></p>
+    <label>Country:</label><br>
+    <select id="select-country">
+      <option value="">Select Country</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+      <option value="in">India</option>
+    </select>
+    <div id="result-select" class="result"></div>
+  </div>
+
+  <!-- Section 5: Clickable Divs (Non-standard) -->
+  <div class="section">
+    <h2>5. Clickable Divs (Non-standard Elements)</h2>
+    <p>Test: <code>"click Action"</code></p>
+    <div class="clickable-div" onclick="handleDivClick('Action')">Action</div>
+    <div class="clickable-div" onclick="handleDivClick('Execute')">Execute</div>
+    <div class="clickable-div" onclick="handleDivClick('Process')">Process</div>
+    <div id="result-divs" class="result"></div>
+  </div>
+
+  <!-- Section 6: ARIA Roles -->
+  <div class="section">
+    <h2>6. ARIA Roles</h2>
+    <p>Test: <code>"click Confirm"</code></p>
+    <div role="button" tabindex="0" id="aria-confirm" style="display:inline-block; padding:10px 20px; background:#28a745; color:white; border-radius:4px; cursor:pointer; margin:5px;">
+      Confirm
+    </div>
+    <div role="button" tabindex="0" id="aria-reject" style="display:inline-block; padding:10px 20px; background:#dc3545; color:white; border-radius:4px; cursor:pointer; margin:5px;">
+      Reject
+    </div>
+    <div id="result-aria" class="result"></div>
+  </div>
+
+  <!-- Section 7: Hidden Elements Test -->
+  <div class="section">
+    <h2>7. Visibility Test</h2>
+    <p>These should NOT be detected:</p>
+    <button style="display:none;">Hidden Button</button>
+    <button style="visibility:hidden;">Invisible Button</button>
+    <button style="opacity:0;">Transparent Button</button>
+    <br>
+    <p>This SHOULD be detected:</p>
+    <button id="btn-visible">Visible Button</button>
+    <div id="result-visibility" class="result"></div>
+  </div>
+
+  <!-- Section 8: Scroll Test -->
+  <div class="section">
+    <h2>8. Scroll Test</h2>
+    <p>Test: <code>"scroll down"</code></p>
+    <p>Add more content here...</p>
+    <p style="margin-top:1000px;">If you can see this after scrolling, scroll works! ✓</p>
+  </div>
+
+  <!-- Section 9: Chain Actions -->
+  <div class="section">
+    <h2>9. Chain Actions</h2>
+    <p>Test: <code>"type test@example.com in search then click Search"</code></p>
+    <input type="text" id="input-search" placeholder="Search...">
+    <button id="btn-search">Search</button>
+    <div id="result-chain" class="result"></div>
+  </div>
+
+  <!-- Status Log -->
+  <div class="section" style="background:#fff3cd; border-color:#ffc107;">
+    <h2>📊 Test Status</h2>
+    <div id="log" style="font-family:monospace; white-space:pre-wrap; font-size:14px;">
+No actions yet. Try running the extension!
+    </div>
+  </div>
+
+  <script>
+    // Event listeners for all interactive elements
+    const log = document.getElementById('log');
+    
+    function addLog(message) {
+      const timestamp = new Date().toLocaleTimeString();
+      const current = log.textContent === 'No actions yet. Try running the extension!' ? '' : log.textContent;
+      log.textContent = current + `[${timestamp}] ${message}\n`;
+    }
+
+    // Buttons
+    document.getElementById('btn-submit')?.addEventListener('click', () => {
+      addLog('✓ Submit button clicked');
+      document.getElementById('result-buttons').textContent = '✓ Submit clicked successfully!';
+      document.getElementById('result-buttons').classList.add('show');
+    });
+
+    document.getElementById('btn-cancel')?.addEventListener('click', () => {
+      addLog('✓ Cancel button clicked');
+    });
+
+    document.getElementById('btn-save')?.addEventListener('click', () => {
+      addLog('✓ Save Changes button clicked');
+    });
+
+    // Links
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        addLog(`✓ Link clicked: ${link.textContent}`);
+        document.getElementById('result-links').textContent = `✓ ${link.textContent} link clicked!`;
+        document.getElementById('result-links').classList.add('show');
+      });
+    });
+
+    // Login button
+    document.getElementById('btn-login')?.addEventListener('click', () => {
+      const email = document.getElementById('input-email').value;
+      addLog(`✓ Login clicked with email: ${email || '(empty)'}`);
+      document.getElementById('result-inputs').textContent = `✓ Login attempt with: ${email || '(no email)'}`;
+      document.getElementById('result-inputs').classList.add('show');
+    });
+
+    // Input monitoring
+    document.getElementById('input-email')?.addEventListener('input', (e) => {
+      addLog(`✓ Email input changed: ${e.target.value}`);
+    });
+
+    document.getElementById('input-search')?.addEventListener('input', (e) => {
+      addLog(`✓ Search input changed: ${e.target.value}`);
+    });
+
+    // Select
+    document.getElementById('select-country')?.addEventListener('change', (e) => {
+      addLog(`✓ Country selected: ${e.target.options[e.target.selectedIndex].text}`);
+      document.getElementById('result-select').textContent = `✓ Selected: ${e.target.options[e.target.selectedIndex].text}`;
+      document.getElementById('result-select').classList.add('show');
+    });
+
+    // Search button
+    document.getElementById('btn-search')?.addEventListener('click', () => {
+      const query = document.getElementById('input-search').value;
+      addLog(`✓ Search clicked with query: ${query || '(empty)'}`);
+      document.getElementById('result-chain').textContent = `✓ Searched for: ${query || '(nothing)'}`;
+      document.getElementById('result-chain').classList.add('show');
+    });
+
+    // Visible button
+    document.getElementById('btn-visible')?.addEventListener('click', () => {
+      addLog('✓ Visible button clicked (good!)');
+      document.getElementById('result-visibility').textContent = '✓ Visible button works!';
+      document.getElementById('result-visibility').classList.add('show');
+    });
+
+    // ARIA buttons
+    document.getElementById('aria-confirm')?.addEventListener('click', () => {
+      addLog('✓ ARIA Confirm button clicked');
+      document.getElementById('result-aria').textContent = '✓ ARIA Confirm clicked!';
+      document.getElementById('result-aria').classList.add('show');
+    });
+
+    document.getElementById('aria-reject')?.addEventListener('click', () => {
+      addLog('✓ ARIA Reject button clicked');
+      document.getElementById('result-aria').textContent = '✓ ARIA Reject clicked!';
+      document.getElementById('result-aria').classList.add('show');
+    });
+
+    // Clickable divs handler
+    function handleDivClick(name) {
+      addLog(`✓ Clickable div clicked: ${name}`);
+      document.getElementById('result-divs').textContent = `✓ ${name} div clicked!`;
+      document.getElementById('result-divs').classList.add('show');
+    }
+
+    // Monitor all clicks for debugging
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName) {
+        console.log('[Test Page] Click detected:', {
+          tag: e.target.tagName,
+          id: e.target.id || '(no id)',
+          text: (e.target.innerText || e.target.textContent || '').slice(0, 30),
+          coords: { x: e.clientX, y: e.clientY }
+        });
+      }
+    });
+
+    addLog('Test page loaded. Extension ready to test!');
+  </script>
+</body>
+</html>
